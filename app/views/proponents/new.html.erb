@@ -1,0 +1,11 @@
+<main class="container">
+  <%= link_to "voltar", proponents_path %>
+
+  <div class="header">
+    <h1>Novo proponent</h1>
+  </div>
+
+  <%= turbo_frame_tag @proponent do %>
+    <%= render "form", proponent: @proponent %>
+  <% end %>
+</main>

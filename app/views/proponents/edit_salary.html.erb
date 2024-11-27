@@ -1,0 +1,13 @@
+<!-- app/views/proponents/edit_salary.html.erb -->
+
+<main class="container">
+  <%= link_to "Voltar", proponent_path(@proponent), class: "btn btn-secondary" %>
+
+  <div class="header">
+    <h1>Editar Salário do Proponente</h1>
+  </div>
+
+  <%= turbo_frame_tag @proponent do %>
+    <%= render "proponents/salary/form_salary", proponent: @proponent %>
+  <% end %>
+</main>

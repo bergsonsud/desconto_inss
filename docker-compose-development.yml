@@ -1,0 +1,81 @@
+version: "3.9"
+
+services:
+  app:
+    &app_base
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    links:
+      - mailcatcher
+    volumes:
+      - .:/app
+    networks:
+      - inss-local
+    tmpfs:
+      - /tmp/pids/
+    environment:
+      RAILS_ENV: development
+      DB_HOST: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: changeme
+      PIDFILE: /tmp/pids/server.pid
+      DATABASE_URL: postgres://postgres:changeme@postgres:5432/inss
+      SMTP_ADDRESS: smtp.inss.org
+      SMTP_PORT: 587
+      SMTP_DOMAIN: sandbox.inss.org
+      SMTP_FROM: noreply@inss.org
+      EMAIL_TO: admin@gmail.com
+
+  app-test:
+    <<: *app_base
+    ports:
+      - "4000:4000"
+    environment:
+      RAILS_ENV: test
+      DB_HOST: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: changeme
+      PIDFILE: /tmp/pids/server.pid
+      DATABASE_URL: postgres://postgres:changeme@postgres:5432/inss
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5452:5432"
+    networks:
+      - inss-local
+    restart: always
+
+  redis:
+    image: redis:7.4.1
+    networks:
+      - inss-local
+
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    networks:
+      - inss-local
+
+volumes:
+  postgres-data:
+  redis-data:
+  mailcatcher:
+
+networks:
+  inss-local:
+    external: true

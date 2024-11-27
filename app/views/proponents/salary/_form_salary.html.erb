@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-content">
+    <%= simple_form_for proponent, html: { class: "form" } do |form| %>
+      <h3><%=form.object.name%></h3>
+      <div class="form-group">
+        <%= form.label :salary, "Salário" %>
+        <%= form.text_field :salary, class: "form-control", value: number_to_currency(form.object.salary, unit: "", separator: ",", delimiter: ".") %>
+      </div><br>
+      <div class="form-group">
+        <%= form.submit "Salvar", class: "btn btn-primary" %>
+        <%= link_to 'Cancelar', proponents_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('#proponent_salary').maskMoney({
+      prefix: "R$ ",
+      allowNegative: true,
+      thousands: ".",
+      decimal: ",",
+      affixesStay: false
+    });
+
+
+    $('form').on('submit', function() {
+      if ($('#proponent_salary').val()){
+        var salary = $('#proponent_salary').maskMoney('unmasked')[0];
+        $('#proponent_salary').val(salary);
+      }
+    });
+  });
+</script>

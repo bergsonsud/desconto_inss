@@ -1,0 +1,11 @@
+<main class="container">
+  <%= link_to "Voltar", proponent_path(@proponent) %>
+
+  <div class="header">
+    <h1>Editar proponent</h1>
+  </div>
+
+  <%= turbo_frame_tag @proponent do %>
+    <%= render "form", proponent: @proponent %>
+  <% end %>
+</main>

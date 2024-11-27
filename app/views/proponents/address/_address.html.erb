@@ -1,0 +1,51 @@
+<div id="address" data-controller="address">
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field" style="width: 35px">
+        <%= form.label 'CEP', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :zip_code, class: 'input', data: { action: "change->address#change_event" } %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label 'Logradouro', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :street, class: 'input', data: { target: "address.street" } %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label 'Número', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :number, class: 'input' %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label 'Bairro', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :neighborhood, class: 'input', data: { target: "address.neighborhood" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <%= form.label 'Cidade', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :city, class: 'input', data: { target: "address.city" } %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :state, style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :state, class: 'input', data: { target: "address.state" } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

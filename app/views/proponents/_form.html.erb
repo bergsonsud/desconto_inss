@@ -1,0 +1,116 @@
+<div class="card">
+  <div class="card-content">
+    <%= simple_form_for proponent, html: { class: "form" } do |form| %>
+      <% if proponent.errors.any? %>
+        <div style="color: red">
+          <h2><%= t('activerecord.errors.messages.count', count: proponent.errors.count, model: 'proponente') %></h2>
+          <ul>
+            <% proponent.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <%= form.label :name, style: "display: block" %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div>
+        <%= form.label :cpf, style: "display: block" %>
+        <%= form.text_field :cpf %>
+      </div>
+
+      <div>
+        <%= form.label :birth_date, style: "display: block" %>
+        <%= form.date_field :birth_date, value: proponent.birth_date&.strftime("%Y-%m-%d") %>
+      </div>
+
+      <div>
+        <%= form.label :salary, style: "display: block" %>
+        <%= form.text_field :salary, onchange: "updateSalary(this.value)", value: number_to_currency(proponent.salary, unit: "", separator: ",", delimiter: ".") %>
+      </div>
+
+      <div>
+        <%= form.label :discount, style: "display: block"%>
+        <%= form.text_field :discount, value: number_to_currency(proponent.discount, unit: "", separator: ",", delimiter: ".") %>
+      </div>
+
+      <div>
+        <%= form.label :personal_phone, style: "display: block" %>
+        <%= form.text_field :personal_phone %>
+      </div>
+
+      <div>
+        <%= form.label :reference_phone, style: "display: block" %>
+        <%= form.text_field :reference_phone %>
+      </div>
+
+      <div>
+        <%= form.text_field :user_id, type: "hidden" %>
+      </div>
+
+      <br>
+      <h1>Endereço</h1>
+
+      <%= form.fields_for :address do |address_form| %>
+        <%= render 'proponents/address/address', form: address_form %>
+      <% end %>
+
+      <div>
+        <%= form.submit 'Salvar', class: "btn btn-primary" %>
+        <%= link_to 'Cancelar', proponents_path, class: "btn btn-secondary" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function updateSalary(salary) {
+    $.ajax({
+      url: "/proponents/calculate_discount",
+      type: "GET",
+      data: { salary: salary },
+      success: function(data) {
+        const formatedDiscount = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(data.discount);
+        $("input[name='proponent[discount]']").val(formatedDiscount).trigger("change");
+        $("input[name='proponent[discount]']").focus();
+
+        $("input[name='proponent[personal_phone]']").focus();
+      }
+    });
+  }
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('#proponent_cpf').mask('000.000.000-00');
+
+    $('#proponent_salary').maskMoney({
+      prefix: "R$ ",
+      allowNegative: true,
+      thousands: ".",
+      decimal: ",",
+      affixesStay: false
+    });
+
+    $('#proponent_discount').maskMoney({
+      prefix: "R$ ",
+      allowNegative: true,
+      thousands: ".",
+      decimal: ",",
+      affixesStay: false
+    });
+
+    $('form').on('submit', function() {
+      if ($('#proponent_salary').val()){
+        var salary = $('#proponent_salary').maskMoney('unmasked')[0];
+        $('#proponent_salary').val(salary);
+      }
+      var discount = $('#proponent_discount').maskMoney('unmasked')[0];
+      $('#proponent_discount').val(discount);
+    });
+  });
+</script>

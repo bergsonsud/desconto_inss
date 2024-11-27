@@ -1,0 +1,16 @@
+[data-image-target="canvas"] {
+    width: 100%; /* Ajusta o gráfico para a largura do contêiner */
+    max-width: 300px; /* Limita a largura máxima */
+    height: 100px; /* Defina a altura desejada */
+    margin: 0 auto; /* Centraliza o gráfico, se necessário */
+}
+
+.column .card .container, .content {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+    margin-right: auto;
+    margin-left: auto;
+}

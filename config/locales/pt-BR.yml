@@ -1,0 +1,145 @@
+pt-BR:
+  activemodel:
+      errors:
+        models:
+          cpf_validatable:
+            attributes:
+              cpf:
+                invalid: "não é válido"
+  devise:
+    password: "Senha"
+    confirmations:
+      confirmed: "Seu endereço de e-mail foi confirmado com sucesso."
+      send_instructions: "Você receberá um e-mail com instruções para confirmar seu endereço de e-mail em alguns minutos."
+      send_paranoid_instructions: "Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um e-mail com instruções para confirmar seu endereço de e-mail em alguns minutos."
+    failure:
+      already_authenticated: "Você já está autenticado."
+      inactive: "Sua conta ainda não foi ativada."
+      invalid: "%{authentication_keys} ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você tem mais uma tentativa antes que sua conta seja bloqueada."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      timeout: "Sua sessão expirou. Faça login novamente para continuar."
+      unauthenticated: "Você precisa fazer login ou se registrar antes de continuar."
+      unconfirmed: "Você precisa confirmar seu endereço de e-mail antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de confirmação"
+      reset_password_instructions:
+        subject: "Instruções para redefinir a senha"
+      unlock_instructions:
+        subject: "Instruções de desbloqueio"
+      email_changed:
+        subject: "E-mail alterado"
+      password_change:
+        subject: "Senha alterada"
+    omniauth_callbacks:
+      failure: "Não foi possível autenticar você pelo %{kind} devido a \"%{reason}\"."
+      success: "Autenticado com sucesso pela conta %{kind}."
+    passwords:
+      no_token: "Você não pode acessar esta página sem vir de um e-mail de redefinição de senha. Se você veio de um e-mail de redefinição de senha, certifique-se de usar a URL completa fornecida."
+      send_instructions: "Você receberá um e-mail com instruções sobre como redefinir sua senha em alguns minutos."
+      send_paranoid_instructions: "Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um link de recuperação de senha no seu e-mail em alguns minutos."
+      updated: "Sua senha foi alterada com sucesso. Você está autenticado agora."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+      minimum_password_length: "Senha"
+    registrations:
+      destroyed: "Até logo! Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve."
+      signed_up: "Bem-vindo! Seu registro foi realizado com sucesso."
+      signed_up_but_inactive: "Seu registro foi realizado com sucesso. No entanto, não foi possível fazer login porque sua conta ainda não foi ativada."
+      signed_up_but_locked: "Seu registro foi realizado com sucesso. No entanto, não foi possível fazer login porque sua conta está bloqueada."
+      signed_up_but_unconfirmed: "Uma mensagem com um link de confirmação foi enviada para seu endereço de e-mail. Por favor, siga o link para ativar sua conta."
+      update_needs_confirmation: "Sua conta foi atualizada com sucesso, mas precisamos verificar seu novo endereço de e-mail. Por favor, verifique seu e-mail e siga o link de confirmação para confirmar seu novo endereço de e-mail."
+      updated: "Sua conta foi atualizada com sucesso."
+      minimum_password_length: "Senha"
+      password: "Senha"
+      updated_but_not_signed_in: "Sua conta foi atualizada com sucesso, mas como sua senha foi alterada, você precisa fazer login novamente."
+    sessions:
+      signed_in: "Login realizado com sucesso."
+      signed_out: "Logout realizado com sucesso."
+      already_signed_out: "Logout realizado com sucesso."
+      remember_me: "Lembrar-me"
+    unlocks:
+      send_instructions: "Você receberá um e-mail com instruções para desbloquear sua conta em alguns minutos."
+      send_paranoid_instructions: "Se sua conta existir, você receberá um e-mail com instruções para desbloqueá-la em alguns minutos."
+      unlocked: "Sua conta foi desbloqueada com sucesso. Faça login para continuar."
+    errors:
+      messages:
+        already_confirmed: "já foi confirmado, tente fazer login"
+        confirmation_period_expired: "precisa ser confirmado dentro de %{period}, solicite um novo"
+        expired: "expirou, solicite um novo"
+        not_found: "não encontrado"
+        not_locked: "não estava bloqueado"
+        not_saved:
+          one: "1 erro impediu que este %{resource} fosse salvo:"
+          other: "%{count} erros impediram que este %{resource} fosse salvo:"
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+  activerecord:
+    models:
+      proponent: "Proponente"
+      address: "Endereço"
+    attributes:
+      proponent:
+        name: "Nome"
+        cpf: "CPF"
+        birth_date: "Data de Nascimento"
+        salary: "Salário"
+        discount: "Desconto"
+        personal_phone: "Telefone Pessoal"
+        reference_phone: "Telefone de Referência"
+      address:
+        street: "Rua"
+        number: "Número"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip_code: "CEP"
+    errors:
+      models:
+        proponent:
+          attributes:
+            name:
+              blank: "não pode ficar em branco"
+            cpf:
+              blank: "não pode ficar em branco"
+              invalid: "não é válido"
+              taken: "já está em uso"
+            salary:
+              not_a_number: "deve ser um número" # Adicionado para erros de validação de número
+              greater_than_or_equal_to: "deve ser maior ou igual a R$ %{count}"
+            discount:
+              not_a_number: "deve ser um número" # Adicionado para erros de validação de número
+        address:
+          attributes:
+            street:
+              blank: "não pode ficar em branco"
+            number:
+              blank: "não pode ficar em branco"
+            neighborhood:
+              blank: "não pode ficar em branco"
+            city:
+              blank: "não pode ficar em branco"
+            state:
+              blank: "não pode ficar em branco"
+            zip_code:
+              blank: "não pode ficar em branco"
+              invalid: "não é válido"
+      messages:
+        blank: "não pode ficar em branco"
+        invalid: "não é válido"
+        taken: "já está em uso"
+        not_a_number: "deve ser um número" # Mensagem geral para erro de validação de número
+        count:
+          one: "1 erro impediu que o proponente fosse salvo"
+          other: "%{count} erros impediram que o proponente fosse salvo"

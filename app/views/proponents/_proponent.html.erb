@@ -1,0 +1,58 @@
+<style>
+.column .card .container, .content {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.title {
+  padding-right: calc(var(--bs-gutter-x)* .5);
+  padding-left: calc(var(--bs-gutter-x)* .5);
+  padding-top: 8px;
+}
+</style>
+<%= turbo_frame_tag dom_id(proponent) do %>
+  <%= turbo_stream_from "proponent_#{proponent.id}" %>
+  <div class="column is-one-third mb-4">
+    <div class="card">
+      <div class="card-content">
+        <h3 class="title is-5"><%= proponent.name %></h3>
+        <div class="content">
+          <p><strong>CPF:</strong> <%= proponent.cpf %></p>
+          <%  if proponent.birth_date.present? %>
+            <p><strong>Data de Nascimento:</strong> <%= l(proponent.birth_date) %></p>
+          <% end %>
+          <p><strong>Salário:</strong> <%= format_real_br(proponent.salary) %></p>
+          <p><strong>Desconto:</strong> <%= format_real_br(proponent.discount) %></p>
+          <% if proponent.personal_phone.present? %>
+            <p><strong>Telefone Pessoal:</strong> <%= proponent.personal_phone %></p>
+          <% end %>
+          <% if proponent.reference_phone.present? %>
+            <p><strong>Telefone de Referência:</strong> <%= proponent.reference_phone %></p>
+          <% end %>
+          <% if proponent.address.present? && proponent.address.street.present? %>
+            <p><strong>Endereço:</strong><br>
+              <%= proponent.address.street %>, <%= proponent.address.number %><br>
+              <%= proponent.address.neighborhood %>, <%= proponent.address.city %> - <%= proponent.address.state %><br>
+              <strong>CEP:</strong> <%= proponent.address.zip_code %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="buttons are-small">
+          <%= link_to "Atualizar salário", edit_salary_proponent_path(proponent), class: "btn btn-secondary", data: { turbo_frame: dom_id(proponent) } %>
+          <%= link_to "Editar", edit_proponent_path(proponent), class: "btn btn-secondary", data: { turbo_frame: dom_id(proponent) } %>
+          <span>
+        <%= link_to "Excluir", proponent_path(proponent), class: "btn btn-danger",
+                    data: {turbo_method: :delete, turbo_confirm: "Tem certeza?"}%>
+      </span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

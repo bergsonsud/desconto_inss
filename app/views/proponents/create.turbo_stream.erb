@@ -1,0 +1,5 @@
+<%= turbo_stream.update Proponent.new, "" %>
+<%= turbo_stream.prepend "proponents" do %>
+  <%= render @proponent %>
+<% end %>
+<%= render_turbo_stream_flash_messages %>

@@ -1,0 +1,65 @@
+<main class="container" data-turbo-prefetch="false">
+  <div class="proponents-header">
+    <h1 class="title is-3">
+      Proponentes
+    </h1>
+    <div style=" height: 500px; justify-content: center; align-items: center;">
+
+      <div data-controller="image">
+        <div id="canvas">
+          <canvas data-image-target="canvas" data-chart-data='<%= @proponents_data.to_h.to_json %>' width="200" height="200"></canvas>
+        </div>
+        <%= link_to "Gerar Relatório", generate_report_proponents_path, class: "btn btn-primary", data: { action: "click->image#generateReport" } %>
+      </div>
+      <%= turbo_stream_from "generate_report" %>
+
+      <%= turbo_frame_tag "status_message" do %>
+        <div id="status_message">
+        </div>
+      <% end %>
+    </div>
+
+  </div><br>
+
+  <%= link_to "Novo Proponente", new_proponent_path, class: "btn btn-success", data: { turbo_frame: "new_proponent" } %>
+
+
+  <div id="flash" class="flash">
+    <%= render "layouts/flash" %>
+  </div>
+  <%= turbo_frame_tag "new_proponent" %>
+  <%= turbo_frame_tag "proponents" do %>
+    <div id="proponents">
+      <%= render @proponents %>
+    </div>
+    <div class="pagination-links">
+      <nav aria-label="Page navigation">
+        <%= paginate @proponents, theme: 'bootstrap-5',
+                     pagination_class: "pagination-sm flex-wrap justify-content-center",
+                     nav_class: "d-inline-block" %>
+      </nav>
+    </div>
+  <% end %>
+</main>
+
+<script>
+  document.addEventListener("turbo:click", function() {
+    window.scrollTo(0, 0);
+  });
+</script>
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    const gerarRelatorioButton = document.querySelector("[data-action='click->image#generateReport']");
+
+    if (gerarRelatorioButton) {
+      gerarRelatorioButton.addEventListener('click', function() {
+        const statusMessage = document.getElementById('status_message');
+        if (statusMessage) {
+          statusMessage.innerHTML = ''; // Limpa o conteúdo de status_message
+        }
+      });
+    }
+  });
+
+</script>

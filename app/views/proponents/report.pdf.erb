@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <style>
+      body { font-family: Arial, sans-serif; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+<h1>Relatório de Proponentes</h1>
+<p>Relatório gerado em: <%= Time.now.strftime("%d/%m/%Y %H:%M") %></p>
+
+<table>
+  <thead>
+  <tr>
+    <th>Faixa Salarial</th>
+    <th>Quantidade de Funcionários</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% data.each do |row| %>
+    <tr>
+      <td><%= row[0] %></td>
+      <td><%= row[1] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+
+<% if image.present? %>
+  <%= image_tag "data:image/#{image_content_type.split('/').last};base64,#{Base64.encode64(image)}", style: 'height: 350px; width: 350px;' %>
+<% end %>
+
+   </body>
+</html>
