@@ -62,7 +62,7 @@ gem "cpf_validation"
 gem "cpf_cnpj"
 gem 'prawn'
 gem 'prawn-table'
-gem 'sidekiq', '~> 7.0', '>= 7.0.1'
+gem 'sidekiq', '~> 7.3'
 gem 'redis'
 gem 'faker'
 
