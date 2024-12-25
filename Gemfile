@@ -78,7 +78,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "factory_bot_rails"
   gem 'rubocop', '~> 1.36'
-  gem 'rubocop-rails', '~> 2.16', '>= 2.16.1'
+  gem 'rubocop-rails', '~> 2.28'
   gem 'rubocop-rspec', '~> 2.13', '>= 2.13.2'
   gem 'rubocop-discourse'
   gem "shoulda-matchers"
